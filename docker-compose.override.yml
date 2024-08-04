@@ -7,11 +7,30 @@ services:
       - "9001:9001"
       - "9000:9000"
     command: [ "server", "/data", "--console-address", ":9001" ]
+    networks:
+      - airflow
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - minio-data:/data
     environment:
-      MINIO_ROOT_USER: admin
+      MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: miniopassword
+  scheduler:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - 8501:8501
+      - 8502:8502
+  webserver:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  triggerer:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  postgres:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
 volumes:
   minio-data:
