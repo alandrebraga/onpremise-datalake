@@ -1,2 +1,4 @@
 apache-airflow-providers-apache-spark
 minio
+polars
+ibis-framework
