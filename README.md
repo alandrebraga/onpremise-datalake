@@ -15,6 +15,7 @@ Este projeto demonstra a criação de uma arquitetura de data lake utilizando te
 
 Obs: Embora o Polars seja usado para processamento de dados neste projeto, ele poderia ser substituído por outras tecnologias como Apache Spark, dependendo dos requisitos de carga de trabalho. A escolha do Polars visa manter a simplicidade da implementação.
 
+No include do projeto tem um dataset que foi baixado do kaggle e pode ser encontrado neste link: https://www.kaggle.com/datasets/shivamkumar121215/nba-stats-dataset-for-last-10-years
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado:
