@@ -23,24 +23,35 @@ services:
     ports:
       - 8501:8501
       - 8502:8502
-    environment:
-      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
   webserver:
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    environment:
-      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 
   triggerer:
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    environment:
-      - JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
   postgres:
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  duckdb:
+    build:
+      context: ./duckdb
+      dockerfile: Dockerfile
+    container_name: duckdb
+    volumes:
+      - duckdb:/duckdb
+      - ./DW:/DW
+    depends_on:
+      - minio
+    networks:
+      - airflow
+      - metabase
+    command: [ "tail", "-f", "/dev/null" ]
 
 volumes:
   minio-data:
+    driver: local
+  duckdb:
     driver: local
